@@ -1,0 +1,12 @@
+1.	For each of the following process state transition, say whether the 
+transition is legal and how the transition occurs or why it cannot.
+    a.	Change from thread state WAIT to thread state RUNNING 
+        i.	This transition is illegal because a process in the WAIT/BLOCKED
+         state must go through the READY state before it can run. It cannot 
+         be schedules from a blocked state to a running state directly. 
+    b.	Change from thread state RUNNING to thread state WAIT
+        i.	This is a legal transition. When a RUNNING process initiates I/O 
+        or any other blocking operation, it then becomes a state of BLOCKED/WAIT.  
+    c.	Change from thread state READY to thread state WAIT
+        i.	This is an illegal transition, because a process must go from READY 
+        to RUNNING, but it cannot go back to WAIT/BLOCKED until it is scheduled and executed. 

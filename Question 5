@@ -1,0 +1,11 @@
+4.	Consider the following piece of C code: 
+void main ( ) { 
+fork ( ); 
+fork ( );
+ exit ( ); 
+} 
+How many child processes are created upon execution of this program?
+
+There will be four new processes created from the two forks. Two of them 
+will be parents and the other two would be the children, each pair containing 
+one of each. 

@@ -8,3 +8,9 @@ int main() {
     }
     return 0;
 }
+
+/*
+Here, the parent process will print to the console, however, 
+because the child process closed the standard output, it will 
+not be able to print to the console. 
+*/
