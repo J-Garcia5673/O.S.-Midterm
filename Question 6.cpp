@@ -29,9 +29,10 @@ int main() {
             args.push_back(token);
             token = strtok(nullptr, " ");
         }
-        args.push_back(nullptr); // Null-terminate
+        args.push_back(nullptr); 
 
-        cout << "count> ";
+        cout << "Select the number of copies \n";
+        cout << "Count: ";
         int count;
         cin >> count;
         if (count < 1 || count > 9) {
@@ -40,7 +41,7 @@ int main() {
             continue;
         }
 
-        cout << "[p]arallel or [s]equential> ";
+        cout << "How should the copies run?" << endl << "p - parrallel " << endl << "s - Sequential" << endl;
         char mode;
         cin >> mode;
         cin.ignore(); // Clear newline
@@ -50,27 +51,26 @@ int main() {
         for (int i = 0; i < count; ++i) {
             pid_t pid = fork();
             if (pid < 0) {
-                perror("fork");
+                perror("fork error");
                 exit(1);
             } else if (pid == 0) {
                 // Child process
                 execvp(args[0], args.data());
-                perror("execvp"); // If exec fails
+                perror("execvp"); // If execution fails
                 exit(1);
             } else {
                 // Parent process
                 if (mode == 's') {
-                    // Sequential: wait right after each fork
+                    // Sequential:
                     waitpid(pid, nullptr, 0);
                 } else if (mode == 'p') {
-                    // Parallel: store pid for later wait
+                    // Parallel:
                     pids.push_back(pid);
                 }
             }
         }
 
         if (mode == 'p') {
-            // Wait for all parallel children
             for (pid_t pid : pids) {
                 waitpid(pid, nullptr, 0);
             }
